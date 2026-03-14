@@ -20,7 +20,8 @@ export default class ProductList {
 
   async init() {
     const list = await this.dataSource.getData();
-    this.renderList(list);
+    const sortedList = list.sort((a, b) => a.NameWithoutBrand.localeCompare(b.NameWithoutBrand));
+    this.renderList(sortedList);
   }
 
   renderList(list) {
