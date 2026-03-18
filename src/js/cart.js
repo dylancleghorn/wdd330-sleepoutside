@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage } from './utils.mjs';
 
 function renderCartContents() {
   let cartItems = [];
@@ -7,19 +7,19 @@ function renderCartContents() {
   for (let i = 0; i < localStorage.length; i++) {
     keys.push(localStorage.key(i));
   }
-  console.log(keys);
+  // console.log(keys);
   keys.forEach((key) => {
     const cart = getLocalStorage(key);
     cartItems.push(cart);
   });
 
-  console.log(cartItems);
-  
-  cartItems.forEach((item) => {
-    console.log(item.Image);
-  });
+  // console.log(cartItems);
+
+  // cartItems.forEach((item) => {
+  //   console.log(item.Image);
+  // });
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  document.querySelector('.product-list').innerHTML = htmlItems.join('');
 }
 
 function cartItemTemplate(item) {
