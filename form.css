@@ -1,0 +1,15 @@
+input:valid {
+  border-color: green;
+}
+
+input:invalid {
+  border-color: red;
+}
+input:required {
+  border-color: blue;
+}
+input {
+  border-width: 2px;
+  border-style: solid;
+  color: aqua;
+}
