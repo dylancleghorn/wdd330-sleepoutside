@@ -7,7 +7,7 @@ export function qs(selector, parent = document) {
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key)) || []; // added empty array when null to avoid error on cart page 
+  return JSON.parse(localStorage.getItem(key)) || []; // added empty array when null to avoid error on cart page
 }
 
 // save data to local storage
@@ -29,14 +29,42 @@ export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get(param);
-  return product
+  return product;
 }
 
-export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false,
+) {
   const htmlStrings = list.map(templateFn);
   // if clear is true we need to clear out the contents of the parent.
   if (clear) {
     parentElement.innerHTML = "";
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if (callback) {
+    callback(data);
+  }
+}
+async function loadTemplate(path) {
+  const response = await fetch(path);
+  return await response.text();
+}
+export async function LoadHeaderFooter() {
+  const headerTemplate = await loadTemplate("../public/partials/header.html");
+
+  const headerElement = document.querySelector("#main-header");
+
+  renderWithTemplate(headerTemplate, headerElement);
+  const footerTemplate = await loadTemplate("../public/partials/footer.html");
+
+  const footerElement = document.querySelector("#main-footer");
+  renderWithTemplate(footerTemplate, footerElement);
 }
