@@ -113,7 +113,9 @@ button {
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
-
+#main-header {
+  border-bottom: 2px solid var(--primary-color);
+}
 /* End utility classes */
 
 /* Cart icon styles */

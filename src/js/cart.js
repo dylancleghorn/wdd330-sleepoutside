@@ -1,8 +1,9 @@
-import { getLocalStorage } from './utils.mjs';
+import { LoadHeaderFooter } from "./utils.mjs";
+import { getLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
-  const cartItems = getLocalStorage('so-cart');
-  const productList = document.querySelector('.product-list');
+  const cartItems = getLocalStorage("so-cart");
+  const productList = document.querySelector(".product-list");
 
   // message when no items in cart
   if (cartItems.length === 0) {
@@ -11,7 +12,7 @@ function renderCartContents() {
   }
 
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  productList.innerHTML = htmlItems.join('');
+  productList.innerHTML = htmlItems.join("");
 }
 
 function cartItemTemplate(item) {
@@ -33,4 +34,6 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
-renderCartContents();
+LoadHeaderFooter().then(() => {
+  renderCartContents();
+});
