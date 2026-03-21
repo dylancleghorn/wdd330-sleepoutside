@@ -7,12 +7,14 @@ export function qs(selector, parent = document) {
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+  return JSON.parse(localStorage.getItem(key)) || [];
 }
+
 // save data to local storage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
@@ -27,14 +29,48 @@ export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get(param);
-  return product
+  return product;
 }
 
-export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false,
+) {
   const htmlStrings = list.map(templateFn);
-  // if clear is true we need to clear out the contents of the parent.
   if (clear) {
     parentElement.innerHTML = "";
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+
+  if (callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  const response = await fetch(path);
+  const template = await response.text();
+  return template;
+}
+
+export async function loadHeaderFooter() {
+  const header = document.querySelector("#main-header");
+  const footer = document.querySelector("#main-footer");
+
+  if (!header || !footer) {
+    return;
+  }
+
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
+
+  renderWithTemplate(headerTemplate, header);
+  renderWithTemplate(footerTemplate, footer);
 }
