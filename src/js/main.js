@@ -6,6 +6,8 @@ import { initNewsletter } from './newsletter.mjs';
 async function init() {
   await loadHeaderFooter();
 
+  initNewsletter();
+
   const dataSource = new ProductData('tents');
   const element = document.querySelector('.product-list');
   const productList = new ProductList('Tents', dataSource, element);
@@ -14,4 +16,4 @@ async function init() {
 }
 
 init();
-initNewsletter();
+
