@@ -211,6 +211,8 @@ button {
   /* max-height: 120px; */
   align-items: center;
   position: relative;
+  width: 100%;
+  padding: 1rem;
 }
 
 .cart-card__remove {
@@ -287,9 +289,9 @@ button {
 }
 
 .cart-card__remove {
-  border: 1px solid #ccc;
+  border: 1px solid red;
   background: #fff;
-  color: #333;
+  color: red;
   width: 2rem;
   height: 2rem;
   border-radius: 999px;
