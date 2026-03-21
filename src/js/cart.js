@@ -1,16 +1,12 @@
-import { getLocalStorage, loadHeaderFooter } from './utils.mjs';
+import { getLocalStorage } from './utils.mjs';
+import { initNewsletter } from './newsletter.mjs';
 
 function renderCartContents() {
   const cartItems = getLocalStorage('so-cart');
-  const productList = document.querySelector('.product-list');
-
-  if (cartItems.length === 0) {
-    productList.innerHTML = '<li class="cart-card">Your cart is empty.</li>';
-    return;
-  }
-
+  if(cartItems) {
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   productList.innerHTML = htmlItems.join('');
+}
 }
 
 function cartItemTemplate(item) {
@@ -35,4 +31,5 @@ async function init() {
   renderCartContents();
 }
 
-init();
+renderCartContents();
+initNewsletter();
