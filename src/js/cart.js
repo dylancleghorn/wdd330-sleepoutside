@@ -14,15 +14,18 @@ function renderCartContents() {
 }
 
 function cartItemTemplate(item) {
+  const image = item.Images?.PrimaryMedium || item.Image;
+  const name = item.NameWithoutBrand || item.Name;
+
   return `<li class="cart-card divider">
-  <a href="#" class="cart-card__image">
+  <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__image">
     <img
-      src="${item.Image}"
-      alt="${item.Name}"
+      src="${image}"
+      alt="${name}"
     />
   </a>
-  <a href="#">
-    <h2 class="card__name">${item.Name}</h2>
+  <a href="/product_pages/index.html?product=${item.Id}">
+    <h2 class="card__name">${name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
