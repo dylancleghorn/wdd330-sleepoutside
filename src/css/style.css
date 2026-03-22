@@ -71,7 +71,6 @@ p {
   background-color: white;
 }
 
-/* utility classes */
 .highlight {
   color: var(--tertiary-color);
 }
@@ -202,6 +201,52 @@ button:hover {
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+/* Alert Styles */
+.alert-list {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.alert-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  margin-bottom: 2px;
+  font-family: var(--font-headline);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  animation: slideDown 0.4s ease-out;
+}
+
+.alert-item p {
+  margin: 0;
+  padding: 0;
+  font-size: var(--large-font);
+}
+
+.alert-item span {
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.alert-item span:hover {
+  transform: scale(1.2);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @media screen and (min-width: 500px) {
