@@ -1,5 +1,6 @@
 import { getLocalStorage } from './utils.mjs';
 import { initNewsletter } from './newsletter.mjs';
+import { loadHeaderFooter } from './utils.mjs';
 
 function renderCartContents() {
   const cartItems = getLocalStorage('so-cart');
@@ -29,7 +30,8 @@ function cartItemTemplate(item) {
 async function init() {
   await loadHeaderFooter();
   renderCartContents();
+  initNewsletter();
 }
 
-renderCartContents();
-initNewsletter();
+init();
+
