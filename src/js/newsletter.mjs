@@ -1,5 +1,6 @@
 export function initNewsletter() {
   const form = document.querySelector('#newsletter-form');
+  if (!form) return;
   const messageDiv = document.querySelector('#newsletter-message');
 
   if (!form) return;
