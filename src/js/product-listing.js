@@ -1,12 +1,20 @@
 import ProductData from './ProductData.mjs';
 import ProductList from './ProductList.mjs';
 import { getParam, loadHeaderFooter } from './utils.mjs';
+import { initNewsletter } from './newsletter.mjs';
 
-loadHeaderFooter();
+async function init() {
+  await loadHeaderFooter();
+  initNewsletter();
 
-const category = getParam('category') || 'tents';
-const dataSource = new ProductData();
-const listElement = document.querySelector('.product-list');
-const myList = new ProductList(category, dataSource, listElement);
+  const category = getParam('category') || 'tents';
+  const dataSource = new ProductData();
+  const listElement = document.querySelector('.product-list');
 
-myList.init();
+  if (!listElement) return;
+
+  const myList = new ProductList(category, dataSource, listElement);
+  await myList.init();
+}
+
+init();
