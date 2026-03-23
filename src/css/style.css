@@ -181,7 +181,7 @@ button:hover {
 .product-card {
   flex: 1 1 45%;
   margin: 0.25em;
-  padding: 0.5em;
+  padding: 2rem .5em .5rem;
   border: 1px solid var(--light-grey);
   max-width: 250px;
   text-align: center;
