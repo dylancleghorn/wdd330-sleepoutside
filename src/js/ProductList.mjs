@@ -1,9 +1,16 @@
 import { renderListWithTemplate } from './utils.mjs';
 
+function formatCategory(category) {
+  return category
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
 function productCardTemplate(product) {
   return `<li class="product-card">
-    <a href="product_pages/index.html?product=${product.Id}">
-      <img src="${product.Image}" alt="Image of ${product.NameWithoutBrand}">
+    <a href="/product_pages/index.html?product=${product.Id}">
+      <img src="${product.Images.PrimaryMedium}" alt="Image of ${product.NameWithoutBrand}">
       <h2 class="card__brand">${product.Brand.Name}</h2>
       <h3 class="card__name">${product.NameWithoutBrand}</h3>
       <p class="product-card__price">$${product.FinalPrice}</p>
@@ -19,9 +26,19 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
-    const sortedList = list.sort((a, b) => a.NameWithoutBrand.localeCompare(b.NameWithoutBrand));
+    const list = await this.dataSource.getData(this.category);
+    const sortedList = list.sort((a, b) =>
+      a.NameWithoutBrand.localeCompare(b.NameWithoutBrand),
+    );
+
     this.renderList(sortedList);
+
+    const titleElement = document.querySelector('.title');
+    if (titleElement) {
+      titleElement.textContent = formatCategory(this.category);
+    }
+
+    document.title = `Sleep Outside | ${formatCategory(this.category)}`;
   }
 
   renderList(list) {
