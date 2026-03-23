@@ -338,7 +338,7 @@ button:hover {
     left: 0;
     right: 0;
     line-height: 1.3;
-    width: 100%;
+    width: 100% !important;
     background-color: var(--dark-grey);
     color: var(--light-grey);
     opacity: 0.8;
@@ -346,7 +346,7 @@ button:hover {
 
   .mission p {
     margin: 0 auto;
-    width: 50%;
+
     text-align: center;
   }
 
@@ -407,7 +407,7 @@ footer {
   display: none;
 }
 
-/* FIX: restore hero overlay positioning after merge */
+/* Home hero */
 .hero {
   position: relative;
 }
@@ -417,12 +417,28 @@ footer {
   display: block;
 }
 
-.hero-text {
+.hero .logo {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.95);
   z-index: 2;
+  border: 1px black solid;
+}
+
+.hero .mission {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  transform: translateX(-50%);
+  width: min(90%, 42rem);
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+
+.hero .mission p {
+  margin: 0;
 }
