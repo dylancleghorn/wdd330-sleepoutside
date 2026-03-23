@@ -441,4 +441,7 @@ footer {
 
 .hero .mission p {
   margin: 0;
+  width: 50%;
+  left: 25%;
+  position: relative;
 }
