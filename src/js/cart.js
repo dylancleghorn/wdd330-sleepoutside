@@ -1,4 +1,9 @@
-import { getLocalStorage, loadHeaderFooter, setLocalStorage } from './utils.mjs';
+import {
+  getLocalStorage,
+  loadHeaderFooter,
+  setLocalStorage,
+} from './utils.mjs';
+import { initNewsletter } from './newsletter.mjs';
 
 function renderCartContents() {
   const cartItems = getLocalStorage('so-cart') || [];
@@ -21,21 +26,22 @@ function cartItemTemplate(item) {
   const name = item.NameWithoutBrand || item.Name || 'Product';
   const color = item.Colors?.[0]?.ColorName || '';
   const price = item.FinalPrice ?? item.ListPrice ?? 0;
+  const id = item.Id || '';
 
   return `
     <li class="cart-card cart-card--enhanced divider">
-      <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__image">
+      <a href="/product_pages/index.html?product=${id}" class="cart-card__image">
         <img src="${image}" alt="${name}" />
       </a>
 
       <div class="cart-card__details">
         <div class="cart-card__top">
-          <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__title-link">
+          <a href="/product_pages/index.html?product=${id}" class="cart-card__title-link">
             <h2 class="card__name">${name}</h2>
           </a>
           <button
             class="cart-card__remove"
-            data-id="${item.Id}"
+            data-id="${id}"
             aria-label="Remove ${name} from cart"
             title="Remove item"
             type="button"
@@ -63,7 +69,9 @@ function addRemoveFromCartListeners() {
 function removeItemFromCart(event) {
   const itemId = event.currentTarget.dataset.id;
   const cartItems = getLocalStorage('so-cart') || [];
-  const updatedCart = cartItems.filter((item) => String(item.Id) !== String(itemId));
+  const updatedCart = cartItems.filter(
+    (item) => String(item.Id) !== String(itemId)
+  );
 
   setLocalStorage('so-cart', updatedCart);
   renderCartContents();
@@ -72,6 +80,7 @@ function removeItemFromCart(event) {
 async function init() {
   await loadHeaderFooter();
   renderCartContents();
+  initNewsletter();
 }
 
 init();

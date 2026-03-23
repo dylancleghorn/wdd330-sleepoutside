@@ -1,0 +1,12 @@
+[
+  {
+    "message": "Flash Sale! 20% off all tents this weekend!",
+    "background": "darkblue",
+    "color": "white"
+  },
+  {
+    "message": "Expect shipping delays due to heavy snow in the mountains.",
+    "background": "red",
+    "color": "yellow"
+  }
+]
