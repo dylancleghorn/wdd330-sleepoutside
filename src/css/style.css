@@ -454,6 +454,7 @@ footer {
   border: 1px black solid;
   padding: 0 1rem;
   width: auto;
+  border-radius: 0.25em;
 }
 
 .hero .mission {
