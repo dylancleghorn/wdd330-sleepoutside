@@ -3,7 +3,7 @@ import { renderListWithTemplate } from "./utils.mjs";
 function productCardTemplate(product) {
   return `<li class="product-card">
     <a href="product_pages/index.html?product=${product.Id}">
-      <img src="${product.Image}" alt="Image of ${product.NameWithoutBrand}">
+      <img src="${product.Images.PrimaryLarge}" alt="Image of ${product.NameWithoutBrand}">
       <h2 class="card__brand">${product.Brand.Name}</h2>
       <h3 class="card__name">${product.NameWithoutBrand}</h3>
       <p class="product-card__price">$${product.FinalPrice}</p>
@@ -19,8 +19,10 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
-    const sortedList = list.sort((a, b) => a.NameWithoutBrand.localeCompare(b.NameWithoutBrand));
+    const list = await this.dataSource.getData(this.category);
+    const sortedList = list.sort((a, b) =>
+      a.NameWithoutBrand.localeCompare(b.NameWithoutBrand),
+    );
     this.renderList(sortedList);
   }
 

@@ -1,3 +1,5 @@
+const baseURL = import.meta.env.VITE_SERVER_URL;
+console.log("baseURL:", baseURL);
 function convertToJson(res) {
   if (res.ok) {
     return res.json();
@@ -8,16 +10,22 @@ function convertToJson(res) {
 export default class ProductData {
   constructor(category) {
     this.category = category;
-    this.path = `/json/${this.category}.json`;
   }
 
-  async getData() {
-    const data = await fetch(this.path).then(convertToJson);
-    return data;
+  async getData(category = this.category) {
+    if (!category) {
+      throw new Error("Category is required to fetch product data");
+    }
+    console.log(`Fetching data for category: ${category}`);
+    const response = await fetch(`${baseURL}products/search/${category}`);
+    const data = await convertToJson(response);
+    console.log("API response:", data);
+    return data.Result;
   }
 
   async findProductById(id) {
-    const products = await this.getData();
-    return products.find((item) => item.Id === id);
+    const response = await fetch(`${baseURL}product/${id}`);
+    const data = await convertToJson(response);
+    return data.Result;
   }
 }
