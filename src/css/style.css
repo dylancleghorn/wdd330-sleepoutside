@@ -172,6 +172,26 @@ button:hover {
   justify-content: center;
 }
 
+.product-list a {
+  text-decoration: none;
+  color: var(--dark-grey);
+}
+
+/* Styles for product lists */
+.product-card {
+  flex: 1 1 45%;
+  margin: 0.25em;
+  padding: 0.5em;
+  border: 1px solid var(--light-grey);
+  max-width: 250px;
+}
+
+.product-card h2,
+.product-card h3,
+.product-card p {
+  margin: 0.5em 0;
+}
+
 /* Cart Card Base */
 .cart-card {
   display: grid;
@@ -216,8 +236,14 @@ button:hover {
   align-items: start;
 }
 
-.cart-card__details {
-  min-width: 0;
+.product-detail {
+  padding: 1em;
+  max-width: 500px;
+  margin: auto;
+}
+
+.product-detail img {
+  width: 100%;
 }
 
 .cart-card__top {
