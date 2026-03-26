@@ -1,4 +1,4 @@
-import ProductData from './ProductData.mjs';
+import ExternalServices from './ExternalServices.mjs';
 import ProductList from './ProductList.mjs';
 import { getParam, loadHeaderFooter } from './utils.mjs';
 import { initNewsletter } from './newsletter.mjs';
@@ -8,7 +8,7 @@ async function init() {
   initNewsletter();
 
   const category = getParam('category') || 'tents';
-  const dataSource = new ProductData();
+  const dataSource = new ExternalServices();
   const listElement = document.querySelector('.product-list');
 
   if (!listElement) return;
